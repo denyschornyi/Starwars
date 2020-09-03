@@ -1,18 +1,32 @@
-const getRecource = async (url) => {
-  const res = await fetch(url);
+class SwapiService {
 
-  if(!res.ok){
-    throw new Error (`Could not fetch ${url}, recived ${res.status}`)
+  _apiBase = `http://swapi.dev/api`
+
+  async getRecource(url){
+    const res = await fetch(`${this._apiBase}${url}`);
+  
+    if(!res.ok){
+      throw new Error (`Could not fetch ${url}, recived ${res.status}`)
+    }
+  
+    return await res.json();
   }
 
-  const body = await res.json();
-  return body;
+  async getAllPeople(){
+    const res = await this.getRecource(`/people/`);
+    return res.results;
+  }
+
+  getPerson(id){
+    return this.getRecource(`/people/${id}`);
+  }
 }
 
-getRecource('http://swapi.dev/api/people/1/')
-  .then(body => {
-    console.log(body);
-  })
-  .catch((err) => {
-    console.log(`Coud not fetch ${err}`);
+
+const swapi = new SwapiService();
+
+swapi.getAllPeople().then(body => {
+  body.forEach( people => {
+    console.log(people.name)
   });
+});
