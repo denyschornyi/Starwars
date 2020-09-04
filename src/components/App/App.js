@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from '../Header';
 import ItemList from '../ItemList';
+import PersonDetails from '../PersonDetails'
 
 import './App.css';
 
@@ -14,7 +15,7 @@ const App = () => {
           <ItemList />
         </div>
         <div className="col-md-6">
-            {/* PersonDetails */}
+            <PersonDetails/>
         </div>
       </div>
     </div>
