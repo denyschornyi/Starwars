@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
 
+import SwapiService from '../../service/SwapiService'
+
 import './RandomPlanet.css';
 
 export default class RandomPlanet extends Component {
+
+    swapiService = new SwapiService();
 
     state = {
         name: null,
         population:  null,
         rotationPeriod: null,
-        diametr: null
+        diameter: null
     }
 
+    constructor(){
+        super();
+        this.updatePlanet();
+    }
+
+    updatePlanet(){
+        this.swapiService.getPlanet(2)
+            .then(planet => {
+                this.setState({
+                    name: planet.name,
+                    population: planet.population,
+                    rotationPeriod: planet.rotation_period,
+                    diameter: planet.diameter
+                })
+            })
+    }
+    
   render() {
 
-    const {name, population, rotationPeriod, diametr} = this.state;
-
+    const {name, population, rotationPeriod, diameter} = this.state;
     return (
       <div className="random-planet jumbotron rounded">
         <img className="planet-image"
@@ -32,7 +52,7 @@ export default class RandomPlanet extends Component {
             </li>
             <li className="list-group-item">
               <span className="term">Diameter</span>
-              <span>{diametr}</span>
+              <span>{diameter}</span>
             </li>
           </ul>
         </div>
