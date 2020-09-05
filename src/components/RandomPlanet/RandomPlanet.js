@@ -33,13 +33,23 @@ export default class RandomPlanet extends Component {
     
   render() {
 
-    const {planet: {id, name, population, rotationPeriod, diameter}, loading} = this.state;
+    const {planet, loading} = this.state;
 
-    // if(loading){
-    //     return <Spiner/>
-    // }
 
-    const randomPlanetEl = <>
+    return (
+      <div className="random-planet jumbotron rounded">
+        {loading ? <Spiner/> : <RandomPlanetElement planet={planet}/>}
+      </div>
+    );
+  }
+}
+
+
+const RandomPlanetElement = ({planet}) => {
+    const {id, name, population, rotationPeriod, diameter} = planet
+
+    return (
+    <React.Fragment>
         <img className="planet-image"
              src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}  alt='planet'/>
         <div>
@@ -59,13 +69,6 @@ export default class RandomPlanet extends Component {
             </li>
           </ul>
         </div>
-    </>;
-
-    return (
-      <div className="random-planet jumbotron rounded">
-        {loading ? <Spiner/> : randomPlanetEl}
-      </div>
-
+    </React.Fragment>
     );
-  }
 }
