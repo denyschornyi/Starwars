@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import SwapiService from '../../service/SwapiService'
+import Spiner from '../Spiner'
 
 import './RandomPlanet.css';
 
