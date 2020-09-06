@@ -7,21 +7,23 @@ import Spiner from '../Spiner'
 
 export default class ItemList extends Component {
 
+  swapiService = new SwapiService();
+  
   state = {
     peopleList: null
   }
 
   renderItems(arr){
-    return arr.map(person => {
+    return arr.map(({id, name}) => {
       return(
-        <li key={person.id} className="list-group-item">
-          {person.name}
+        <li key={id}
+             className="list-group-item"
+             onClick={() => this.props.onItemSelected(id)}>
+          {name}
       </li>
       );
     });
   }
-
-  swapiService = new SwapiService();
 
   componentDidMount(){
     this.swapiService
