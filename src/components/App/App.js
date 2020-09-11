@@ -10,7 +10,7 @@ import './App.css';
 class App extends Component{
 
   state = {
-    selectedPerson: 5
+    selectedPerson: null
   }
 
   onPersonSelected = (id) => {
