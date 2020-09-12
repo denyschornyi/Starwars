@@ -42,7 +42,7 @@ export default class SwapiService {
       return this._transformStarship(starship);
     }
 
-    _exttractId(item){
+    _exttractId = (item) => {
       const idRegExp = /\/([0-9]*)\/$/;
       return item.url.match(idRegExp)[1];
     }
